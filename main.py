@@ -2,8 +2,8 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget, QVBoxLayout, QAction, QHBoxLayout, QFrame
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
-from menu import MenuBarBuilder
-from sidebar import Sidebar
+from ui.menu import MenuBarBuilder
+from ui.sidebar import Sidebar
 
 
 class WindowConfig:
