@@ -7,8 +7,8 @@ from ui.contentpanel import ContentPanel
 
 
 class WindowConfig:
-    TITLE = "Fourth Window"
-    LOGO = "logo.png"
+    TITLE = "PyroX"
+    LOGO = "pyrox_logo.png"
 
 
 class MainWindow(QMainWindow):
@@ -56,7 +56,13 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == "__main__":
+    import ctypes
+
+    myappid = "pyrox.app.v1"  # any unique string
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("pyrox_logo.png"))
 
     window = MainWindow()
     window.show()

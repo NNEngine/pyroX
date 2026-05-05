@@ -117,7 +117,7 @@ class ContentPanel(QWidget):
         top_bar = QHBoxLayout()
         top_bar.addStretch()
 
-        self.upload_btn = QPushButton("Upload Image (*.png *.jpg *.jpeg *.bmp)")
+        self.upload_btn = QPushButton("Upload Image (.png .jpg .jpeg .bmp)")
         self.remove_btn = QPushButton("Remove")
         self.zoom_in_btn = QPushButton("+")
         self.zoom_out_btn = QPushButton("-")
