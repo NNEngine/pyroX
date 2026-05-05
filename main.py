@@ -1,9 +1,9 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget, QVBoxLayout, QAction, QHBoxLayout, QFrame
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QHBoxLayout, QFrame
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
 from ui.menu import MenuBarBuilder
 from ui.sidebar import Sidebar
+from ui.contentpanel import ContentPanel
 
 
 class WindowConfig:
@@ -12,47 +12,47 @@ class WindowConfig:
 
 
 class MainWindow(QMainWindow):
-        def __init__(self):
-                super().__init__()
+    def __init__(self):
+        super().__init__()
 
-                self.setWindowTitle(WindowConfig.TITLE)
-                self.setWindowIcon(QIcon(WindowConfig.LOGO))
-                self.setStyleSheet("background-color:#141313;")
-                self.showMaximized()
+        self.setWindowTitle(WindowConfig.TITLE)
+        self.setWindowIcon(QIcon(WindowConfig.LOGO))
+        self.setStyleSheet("background-color:#141313;")
+        self.showMaximized()
 
-                self.initMenu()
-                self.initSidebar()
+        self.initMenu()
+        self.initUI()
 
-        def initMenu(self):
-                MenuBarBuilder(self).build()
+    def initMenu(self):
+        MenuBarBuilder(self).build()
 
-        def initSidebar(self):
-                central = QWidget()
-                self.setCentralWidget(central)
+    def initUI(self):
+        central = QWidget()
+        self.setCentralWidget(central)
 
-                main_layout = QHBoxLayout()
+        main_layout = QHBoxLayout(central)
+        main_layout.setContentsMargins(0, 0, 0, 0)
 
-                # Plug in sidebar
-                self.sidebar = Sidebar()
+        # 🔹 Sidebar
+        self.sidebar = Sidebar()
 
-                separator = QFrame()
-                separator.setFrameShape(QFrame.VLine)
-                separator.setFrameShadow(QFrame.Sunken)
-                separator.setStyleSheet("background-color: #3a3a3a;")
-                separator.setFixedWidth(2)
+        # 🔹 Vertical separator
+        separator = QFrame()
+        separator.setFixedWidth(2)
+        separator.setStyleSheet("background-color: #3a3a3a;")
 
-                # Content area
-                self.content = QLabel("Main Content")
-                self.content.setAlignment(Qt.AlignCenter)
+        # 🔹 Content panel
+        self.content = ContentPanel()
 
-                main_layout.addWidget(self.sidebar)
-                main_layout.addWidget(separator)
-                main_layout.addWidget(self.content)
+        # 🔹 Add widgets
+        main_layout.addWidget(self.sidebar)
+        main_layout.addWidget(separator)
+        main_layout.addWidget(self.content)
 
-                main_layout.setStretch(0, 1)
-                main_layout.setStretch(1, 4)
-
-                central.setLayout(main_layout)
+        # 🔹 Stretch behavior
+        main_layout.setStretch(0, 0)  # sidebar
+        main_layout.setStretch(1, 0)  # separator
+        main_layout.setStretch(2, 1)  # content
 
 
 if __name__ == "__main__":
@@ -60,4 +60,5 @@ if __name__ == "__main__":
 
     window = MainWindow()
     window.show()
+
     sys.exit(app.exec_())
