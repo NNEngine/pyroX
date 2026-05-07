@@ -28,7 +28,6 @@ class MenuBarBuilder:
             }
         """)
 
-        # File Menu
         file_menu = menubar.addMenu("File")
 
         new_action = QAction("New", self.window)
@@ -46,7 +45,6 @@ class MenuBarBuilder:
         file_menu.addSeparator()
         file_menu.addAction(exit_action)
 
-        # Edit Menu
         edit_menu = menubar.addMenu("Edit")
 
         copy_action = QAction("Copy", self.window)
@@ -55,7 +53,6 @@ class MenuBarBuilder:
         edit_menu.addAction(copy_action)
         edit_menu.addAction(paste_action)
 
-        # Help Menu
         help_menu = menubar.addMenu("Help")
 
         help_action = QAction("Help",self.window)
